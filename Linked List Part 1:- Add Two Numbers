@@ -1,0 +1,95 @@
+class Solution {
+public:
+      
+    void insertAtTail(ListNode* &head,ListNode* &tail, int val){
+        
+        ListNode* temp = new ListNode(val);
+        
+        //empty list
+        if(head==NULL){
+            
+            head=temp;
+            tail=temp;
+            return;
+            }
+            
+        else{
+            tail->next=temp;
+            tail=temp;
+            }
+    }
+    
+     ListNode* add(ListNode* l1,ListNode* l2,ListNode* temp){
+
+         int carry=0;
+         
+         ListNode* ansHead=NULL;
+         ListNode* ansTail=NULL;
+         
+         while(l1!=NULL || l2!=NULL || carry!=0){
+
+         int sum =( l1 ? l1->val : 0 )+ (l2 ? l2->val : 0) + carry;
+             int digit=sum%10;
+             
+             
+             insertAtTail(ansHead,ansTail,digit);
+             
+             carry=sum/10;
+             
+           l1 = l1 ? l1->next : nullptr;
+            l2 = l2 ? l2->next : nullptr;
+             
+         }
+         
+//           while(l1!=NULL){
+
+//          int sum = l1->val +  carry;
+//              int digit=sum%10;
+             
+             
+//              insertAtTail(ansHead,ansTail,digit);
+             
+//              int carry=sum/10;
+             
+//              l1=l1->next;
+             
+//          }
+         
+//           while(l2!=NULL){
+
+//          int sum = l2->val + carry;
+//              int digit=sum%10;
+             
+//              insertAtTail(ansHead,ansTail,digit);
+             
+//              int carry=sum/10;
+             
+//              l2=l2->next;
+              
+//          }
+         
+//           while(carry!=0){
+
+//          int sum = carry;
+//              int digit=sum%10;
+             
+             
+//              insertAtTail(ansHead,ansTail,digit);
+             
+//              int carry=sum/10;
+             
+//          }
+         
+ return ansHead;
+          }
+    
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        
+        
+        ListNode* temp=add(l1,l2,temp);
+        
+        return temp;
+        
+        
+    }
+};
