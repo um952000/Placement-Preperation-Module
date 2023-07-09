@@ -1,0 +1,73 @@
+class Solution {
+public:
+    
+    bool isPalindrome(ListNode* head) {
+        
+        stack<int> st;
+        
+        ListNode* temp = head;
+        int a=0;
+        
+      while(temp!=NULL){
+          
+        temp= temp->next;
+          a++;
+        }
+        
+        temp=head;
+        
+        int count = 0;
+        
+        if(a%2==0){
+            
+            while(count<a/2){
+                
+                st.push(temp->val);
+                count++;
+                temp=temp->next;
+           }
+            
+            while(!st.empty()){
+
+                if(st.top()!=temp->val){
+                    
+                    return false;
+                }
+                
+                else{
+                    
+                    temp=temp->next;
+                    st.pop();
+                }
+            }
+        }
+        
+        else{
+                  while(count<(a/2)+1){
+                
+                st.push(temp->val);
+                count++;
+                temp=temp->next;
+           }
+                        
+                        st.pop();
+            
+            while(!st.empty()){
+
+                if(st.top()!=temp->val){
+                    
+                    return false;
+                }
+                
+                else{
+                    
+                    temp=temp->next;
+                    st.pop();
+                }
+            }
+        }
+                        
+        return true;                
+        
+    }
+};
