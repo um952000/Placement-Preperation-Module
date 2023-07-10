@@ -1,0 +1,74 @@
+class Solution {
+private:
+    void insertAtTail(Node* &head, Node* &tail, int data){
+        Node* newNode = new Node(data);
+
+        if(head == NULL){
+            head = newNode;
+            tail = newNode;
+            return;
+        }
+        else{
+            tail ->next = newNode;
+            tail = newNode;
+        }
+    }
+
+public:
+    Node* copyRandomList(Node* head) {
+
+        // step-1 create a clone list with next pointers 
+        Node* cloneHead = NULL;
+        Node* cloneTail = NULL;
+        Node* temp = head;
+
+        while(temp != NULL){
+            insertAtTail(cloneHead, cloneTail, temp->val);
+            temp = temp->next;
+        }
+
+        // With O(N), O(1), time & space complexity
+
+        // Step-2 clone nodes add in between original nodes
+        Node* temp1 = head;
+        Node* temp2 = cloneHead;
+
+        while(temp1 != NULL && temp2 != NULL){
+            Node* next = temp1->next;
+            temp1->next = temp2;
+            temp1 = next;
+
+            next = temp2->next;
+            temp2->next = temp1;
+            temp2 = next;
+        }
+
+        // step-3 random pointr copy
+        temp = head;
+        while(temp != NULL){
+            if(temp->next != NULL){
+                temp->next->random = temp->random 
+                ? temp->random->next : temp->random;
+            }
+            temp = temp->next->next;
+        } 
+
+        // step-4 revert the changes from step 2
+        temp1 = head;
+        temp2 = cloneHead;
+
+        while(temp1 != NULL && temp2 != NULL){
+            temp1->next = temp2->next;
+            temp1 = temp1->next;
+
+            if(temp1 != NULL){
+                temp2->next = temp1->next;
+            }
+            temp2 = temp2->next;
+        }
+
+        return cloneHead;
+
+       
+    }
+};
