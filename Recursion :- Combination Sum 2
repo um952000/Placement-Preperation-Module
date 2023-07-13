@@ -1,0 +1,42 @@
+class Solution {
+public:
+ void ff(int index, vector<int>& subset, int tar,  
+                    vector<vector<int>>& res, vector<int>& arr)
+    {   
+         if(index == arr.size())
+           {
+               if(tar == 0)
+                 res.push_back(subset);
+               
+               return;
+           }
+
+        if(arr[index] <= tar)
+        {
+            subset.push_back(arr[index]);
+            ff(index+1, subset, tar-arr[index], res, arr);
+            subset.pop_back();
+
+            // I do not want to perform same repeated cases for same upcoming element
+            // for ex if i have started once with element 1 then upcoming 1 will give same ans so   
+            // skipping them
+
+            while(index < arr.size()-1 && arr[index] == arr[index+1])
+                index++;
+        }
+
+         ff(index+1, subset, tar, res, arr);
+
+    }
+
+    vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
+   
+        sort(candidates.begin(), candidates.end());
+        vector<vector<int>> res;
+        vector<int> subset;
+
+        ff(0, subset, target, res, candidates);
+
+        return res;
+    }
+};
