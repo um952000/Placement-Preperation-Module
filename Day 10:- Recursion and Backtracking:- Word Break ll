@@ -1,0 +1,42 @@
+class Solution {
+public:
+    vector<string> ans;
+    void helper(string &s,set<string>&st,int i,string &a)
+    {
+        if(i==s.size())
+        {
+            a.pop_back();
+            ans.push_back(a);
+            return;
+        }
+        string temp="";
+        for(int j=i;j<s.size();j++)
+        {
+            temp.push_back(s[j]);
+            if(st.find(temp)!=st.end())
+            {
+                temp.push_back(' ');
+                //old string
+                string t=a;
+                //adding new string(word)
+                t+=temp;
+                helper(s,st,j+1,t);
+                temp.pop_back();
+            }
+
+        }
+
+    }
+
+    vector<string> wordBreak(string &s, vector<string>& wordDict) {
+        
+        set<string>st;
+        for(auto it:wordDict)
+        {
+            st.insert(it);
+        }
+        string a="";
+        helper(s,st,0,a);
+        return ans;
+    }
+};
