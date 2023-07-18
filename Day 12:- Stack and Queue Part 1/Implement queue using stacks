@@ -1,0 +1,59 @@
+class MyQueue {
+public:
+    
+    stack<int> st1;
+    stack<int> st2;
+    MyQueue() {
+        
+    }
+    
+    void push(int x) {
+        if(st1.empty())
+        {
+                st1.push(x);
+        }
+        else{{
+            while(!st1.empty()){
+                st2.push(st1.top());
+                st1.pop();
+            }
+
+              //stack me sabse neeche push kr rhe hai
+              st1.push(x);
+            
+            while(!st2.empty()){
+                  st1.push(st2.top());
+                st2.pop();
+            }
+        }}
+    }
+    
+    int pop() {
+        
+        int a=st1.top();
+        st1.pop();
+        
+        return a;
+        
+    }
+    
+    //jo sabse pehle pada hai vo hai peek
+    int peek() {
+        
+        return st1.top();
+        
+    }
+    
+    bool empty() {
+        
+        if(!st1.empty()){
+
+        return false;
+        }
+        
+        else
+            return true;
+        
+        
+    }
+};
