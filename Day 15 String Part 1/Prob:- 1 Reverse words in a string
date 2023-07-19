@@ -1,0 +1,39 @@
+class Solution {
+public:
+    string reverseWords(string s) {
+        
+        string ans="",temp="";
+        stack<string> st;
+        
+        for(int i=0;i<s.size();i++)
+        {
+            if(s[i]==' '){
+
+             if(temp!="")
+                 st.push(temp);
+                
+                temp="";
+            }
+            
+            else
+                temp+=s[i];
+        }
+         
+        // remaingin last word ko push Kar rhe hai stack me.......
+        if(temp.size())
+             st.push(temp);
+
+        
+        while(!st.empty()){
+
+            ans+=st.top();
+            st.pop();
+            
+            ans+=' ';
+    }
+        // removing the last space.......
+        ans.pop_back();
+         
+         return ans;
+    }
+};
