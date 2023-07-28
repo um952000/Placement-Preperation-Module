@@ -1,0 +1,25 @@
+class Solution {
+public:
+    ListNode* middleNode(ListNode* head) {
+        
+        ListNode* slow=head;
+        ListNode* fast=head->next;
+        ListNode* temp=NULL;
+        
+        while(fast!=NULL){
+
+            fast=fast->next;
+            if(fast!=temp){
+
+                fast=fast->next;
+            
+            }
+            
+            slow=slow->next;
+        
+        }
+        
+        return slow;
+    
+    }
+};
