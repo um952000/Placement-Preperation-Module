@@ -1,0 +1,25 @@
+class Solution {
+public:
+    vector<vector<int>> merge(vector<vector<int>>& intervals) {
+
+     sort(intervals.begin(), intervals.end());
+        vector<vector<int>> res;
+        res.push_back(intervals[0]); // pushing the first 0th position START and END value for futher checking.
+        int x = 0;
+        
+        for (int i = 1; i < intervals.size(); ++i)
+        {
+            if (res[x][1] >= intervals[i][0]) // checking if END value in res is greater than START value in intervals vector.
+            {
+                res[x][1] = max(res[x][1], intervals[i][1]); //replacing the greater value in the END of res vector.
+            }
+            else
+            {
+                ++x; // if not iterating x and,
+                res.push_back(intervals[i]);
+     // pushing again next START END value of intervals vector for further checking, and this process repeated until the loop ends.
+            }
+        }
+        return res;
+    }
+};
